@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>USDB</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="USDB is a USD-denominated digital token created within the Blotix ecosystem, used to settle client withdrawals. Ethereum mainnet, ERC-20.">
+<link rel="canonical" href="https://usdbtoken.com/">
+<link rel="icon" type="image/svg+xml" href="img/USDB_logo.svg">
+<meta property="og:title" content="USDB">
+<meta property="og:description" content="USD-denominated digital token created within the Blotix ecosystem.">
+<meta property="og:url" content="https://usdbtoken.com/">
+<meta property="og:image" content="https://usdbtoken.com/img/USDB_logo_512.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #110B22;
+    --bg2: #170F2E;
+    --surface: #1D1538;
+    --line: #2E2452;
+    --ink: #EFEAFB;
+    --muted: #A99DC9;
+    --accent: #8B5CF6;
+    --accent-deep: #4C1D95;
+    --lilac: #E4D4FA;
+    --ok: #4BD1A0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 16px; line-height: 1.6;
+    padding-inline: 20px; padding-block: 0 64px;
+  }
+  a { color: var(--lilac); text-decoration: none; border-bottom: 1px solid rgba(228,212,250,.35); }
+  a:hover { border-bottom-color: var(--lilac); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1, h2, h3 { font-family: Poppins, "IBM Plex Sans", sans-serif; font-weight: 700; line-height: 1.15; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(40px, 7vw, 64px); letter-spacing: -0.02em; }
+  h2 { font-size: 28px; margin-bottom: 14px; }
+  h3 { font-size: 18px; font-weight: 600; }
+  p { margin: 0 0 14px; max-width: 64ch; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .9em; word-break: break-all; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+
+  nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 18px; border: 0; }
+  nav .brand svg { width: 30px; height: 30px; }
+  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; }
+  nav ul a { border: 0; color: var(--muted); font-size: 14px; font-weight: 500; }
+  nav ul a:hover { color: var(--ink); }
+
+  header.hero { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: center; padding-block: 48px 56px; }
+  header.hero .logo { width: 220px; height: 220px; filter: drop-shadow(0 20px 40px rgba(76,29,149,.45)); }
+  header.hero .lede { font-size: 19px; color: var(--muted); max-width: 52ch; margin-top: 14px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); margin-bottom: 18px; }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+  .btn { display: inline-block; padding: 12px 18px; border-radius: 8px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:hover { filter: brightness(1.1); }
+
+  section { padding-block: 44px; border-top: 1px solid var(--line); }
+
+  .details { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 18px; }
+  .details > div { background: var(--surface); padding: 14px 18px; }
+  .details dt { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+  .details dd { margin: 0; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  .step .n { font-family: Poppins, sans-serif; font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: 15px; margin: 6px 0 0; }
+
+  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+  .person { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; }
+  .person .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-deep)); display: grid; place-items: center; font-family: Poppins, sans-serif; font-weight: 700; color: #fff; font-size: 20px; }
+  .person .role { color: var(--muted); font-size: 14px; }
+  .person a { font-size: 14px; }
+
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .links a { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; color: var(--ink); font-weight: 500; }
+  .links a span { display: block; color: var(--muted); font-size: 13px; font-weight: 400; margin-top: 2px; }
+  .links a:hover { border-color: var(--accent); }
+
+  .notice { background: var(--bg2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 18px; color: var(--muted); font-size: 14px; }
+  .notice p { max-width: none; }
+  footer { color: var(--muted); font-size: 13px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 720px) {
+    header.hero { grid-template-columns: 1fr; text-align: left; padding-block: 24px 40px; }
+    header.hero .logo { width: 150px; height: 150px; }
+    .details, .steps { grid-template-columns: 1fr; }
+    nav ul { gap: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<nav aria-label="Main">
+  <a class="brand" href="#top" aria-label="USDB home">
+    <svg viewBox="0 0 1024 1024" aria-hidden="true"><defs><radialGradient id="gn" cx="0.5" cy="0.42" r="0.66"><stop offset="0" stop-color="#7A35E6"/><stop offset="1" stop-color="#45178C"/></radialGradient></defs><circle cx="512" cy="512" r="512" fill="url(#gn)"/><path fill="#E4D4FA" d="M229.074 199.142L794.835 199.268L794.828 573.914C794.574 666.156 747.777 738.769 684.273 801.927C637.615 848.08 571.442 888.471 512.176 915.778C500.725 911.158 487.632 904.119 476.451 898.268C363.453 839.137 248.495 738.156 230.9 604.843C228.038 583.157 229.022 558.51 229.03 536.546L229.064 442.769L229.074 199.142Z"/><path fill="#481A8F" d="M355.789 312.914L501.825 313.04L555.117 313.007C581.354 312.988 602.887 312.213 628.614 319.231C680.124 333.282 703.2 378.996 687.871 429.993C680.588 454.308 665.343 475.468 644.585 490.075C638.374 494.438 631.968 497.812 625.312 501.403C680.218 521.093 686.546 576.446 666.615 625.882C659.035 644.683 645.43 660.217 630.167 673.305C610.779 690.163 582.297 701.319 557.24 705.876C539.681 709.069 524.384 709.051 506.741 709.059L467.013 709.055L335.547 709.052C338.679 693.99 343.093 677.177 346.727 662.094L367.549 576.123L414.875 380.511C400.624 363.304 383.977 346.188 369.616 328.871C365.125 323.455 360.163 318.564 355.789 312.914Z"/><path fill="#E4D4FA" d="M460.594 540.337C479.497 540.83 498.854 540.122 517.77 540.422C533.514 541.059 550.588 538.523 565.804 543.359C608.819 557.029 596.626 608.831 563.093 626.288C542.498 636.03 525.088 634.006 503.03 633.998L438.586 634.001C440.421 623.934 443.586 611.663 446.015 601.604C451.024 581.218 455.884 560.795 460.594 540.337Z"/><path fill="#E4D4FA" d="M498.429 384.952L538.811 384.914C553.049 384.897 566.787 384.013 580.787 387.42C603.718 393.001 612.431 411.413 605.921 433.404C601.696 447.679 593.514 456.71 580.635 463.975C564.659 472.538 542.258 471.41 524.435 471.43L477.27 471.37C484.369 442.893 491.814 413.505 498.429 384.952Z"/></svg>
+    USDB
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#details">Token</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <img class="logo" src="img/USDB_logo.svg" alt="USDB logo" width="220" height="220">
+  <div>
+    <span class="pill"><span class="dot"></span> Testing phase · Ethereum mainnet</span>
+    <h1>USDB</h1>
+    <p class="lede">A USD-denominated digital token created within the Blotix ecosystem, used to settle client withdrawals and to study decentralized financial markets.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">View on Etherscan</a>
+      <a class="btn" href="https://github.com/gasteh/blotix-usdb">Source code</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <p class="eyebrow">About</p>
+  <h2>What USDB is</h2>
+  <p>USDB is an ERC‑20 token on Ethereum issued within the Blotix ecosystem. Blotix uses it to settle withdrawals of its platform clients: when a client withdraws, they receive USDB in their own wallet and are free to hold it, transfer it, or exchange it for USDT on Uniswap.</p>
+  <p>Its value is referenced to the US dollar and supported by reserves held by the issuer. No guarantee of price stability is made. Issuance and redemption are controlled by a multi‑signature Safe; the contract is not upgradeable and charges no transfer fees.</p>
+  <div class="notice"><p><strong>Testing phase.</strong> USDB is currently used internally to validate the system. It is not offered to the public, it is not an investment product, and it should not be purchased with the expectation of profit.</p></div>
+</section>
+
+<section id="details">
+  <p class="eyebrow">Token</p>
+  <h2>Token details</h2>
+  <dl class="details">
+    <div><dt>Network</dt><dd>Ethereum mainnet</dd></div>
+    <div><dt>Standard</dt><dd>ERC‑20 with EIP‑2612 permit</dd></div>
+    <div><dt>Contract</dt><dd><a class="mono" href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB</a><br><small style="color:var(--muted)">Source verified on Etherscan</small></dd></div>
+    <div><dt>Symbol / decimals</dt><dd>USDB / 6</dd></div>
+    <div><dt>Issuer</dt><dd>Safe multisig <a class="mono" href="https://etherscan.io/address/0xEA3021F4A10a94E80d60bF7Cc1f855312E263846">0xEA3021F4A10a94E80d60bF7Cc1f855312E263846</a></dd></div>
+    <div><dt>Liquidity</dt><dd>Uniswap V3 · USDB/USDT · 0.01% · <a class="mono" href="https://etherscan.io/address/0x74bf3e066e624b848c178407f2f4cbba6205be2e">0x74bf3e…5be2e</a></dd></div>
+    <div><dt>Code base</dt><dd>OpenZeppelin Contracts 5.6.1 · Solidity 0.8.26</dd></div>
+    <div><dt>Issuer controls</dt><dd>mint, burn, pause, blacklist · two‑step ownership · no upgrade path</dd></div>
+  </dl>
+</section>
+
+<section id="how">
+  <p class="eyebrow">Process</p>
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Withdrawal request</h3><p>A Blotix platform client requests a withdrawal of their balance.</p></div>
+    <div class="step"><div class="n">2</div><h3>USDB delivered</h3><p>The client receives USDB in their own Ethereum wallet, under their sole control.</p></div>
+    <div class="step"><div class="n">3</div><h3>Free to use</h3><p>The client can hold it, transfer it, or exchange it for USDT on Uniswap.</p></div>
+  </div>
+</section>
+
+<section id="team">
+  <p class="eyebrow">People</p>
+  <h2>Team</h2>
+  <div class="team">
+    <div class="person"><div class="avatar">MF</div><div><h3>Massimo Fustinoni</h3><div class="role">Protocol Lead / Strategic Coordinator</div><a href="https://www.linkedin.com/in/maxfortunapruduction/">LinkedIn</a></div></div>
+    <div class="person"><div class="avatar">MS</div><div><h3>Massimo Sbordi</h3><div class="role">Strategic Development Manager, Blotix Fund LLC</div><a href="https://www.linkedin.com/in/massimo-sbordi-ab39747/">LinkedIn</a></div></div>
+    <div class="person"><div class="avatar">GT</div><div><h3>Gastón Temperini</h3><div class="role">Lead Developer</div><a href="https://www.linkedin.com/in/gast%C3%B3n-temperini-713361">LinkedIn</a></div></div>
+  </div>
+</section>
+
+<section id="resources">
+  <p class="eyebrow">Resources</p>
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">Etherscan <span>Token page, holders and verified source</span></a>
+    <a href="https://github.com/gasteh/blotix-usdb">GitHub <span>Contract source and brand assets</span></a>
+    <a href="https://app.uniswap.org/explore/tokens/ethereum/0xdaf05c8680a06a5a30a8e3ffe25062ed4e4d21fb">Uniswap <span>USDB/USDT pool</span></a>
+    <a href="https://www.blotix.io">Blotix <span>The ecosystem USDB was created in</span></a>
+    <a href="https://blotix.org/files/WHITEPAPER_BLOTIX_1.pdf">Blotix whitepaper <span>Ecosystem, team and roadmap (PDF)</span></a>
+    <a href="img/USDB_logo.svg">Logo (SVG) <span>Brand asset, also available as PNG</span></a>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="eyebrow">Contact</p>
+  <h2>Get in touch</h2>
+  <p>Email: <a href="mailto:contact@usdbtoken.com">contact@usdbtoken.com</a></p>
+</section>
+
+<footer>
+  <span>© 2026 USDB · Created within the Blotix ecosystem</span>
+  <span>Not an offer to the public. Not investment advice.</span>
+</footer>
+</div>
+
+</body>
+</html>
