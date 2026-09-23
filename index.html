@@ -4,11 +4,11 @@
 <title>USDB</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="USDB is a USD-denominated digital token created within the Blotix ecosystem, used to settle client withdrawals. Ethereum mainnet, ERC-20.">
+<meta name="description" content="USDB is a USD-denominated ERC-20 token issued by Blotix Fund LLC on Ethereum mainnet and used to pay Blotix platform clients. Contract details, reserves, security, team and FAQ.">
 <link rel="canonical" href="https://usdbtoken.com/">
 <link rel="icon" type="image/svg+xml" href="img/USDB_logo.svg">
 <meta property="og:title" content="USDB">
-<meta property="og:description" content="USD-denominated digital token created within the Blotix ecosystem.">
+<meta property="og:description" content="USD-denominated digital token issued within the Blotix ecosystem on Ethereum.">
 <meta property="og:url" content="https://usdbtoken.com/">
 <meta property="og:image" content="https://usdbtoken.com/img/USDB_logo_512.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -24,6 +24,7 @@
     --accent-deep: #4C1D95;
     --lilac: #E4D4FA;
     --ok: #4BD1A0;
+    --warn: #F2C063;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -34,20 +35,24 @@
   }
   a { color: var(--lilac); text-decoration: none; border-bottom: 1px solid rgba(228,212,250,.35); }
   a:hover { border-bottom-color: var(--lilac); }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .wrap { max-width: 920px; margin: 0 auto; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 940px; margin: 0 auto; }
   h1, h2, h3 { font-family: Poppins, "IBM Plex Sans", sans-serif; font-weight: 700; line-height: 1.15; margin: 0; text-wrap: balance; }
   h1 { font-size: clamp(40px, 7vw, 64px); letter-spacing: -0.02em; }
   h2 { font-size: 28px; margin-bottom: 14px; }
   h3 { font-size: 18px; font-weight: 600; }
-  p { margin: 0 0 14px; max-width: 64ch; }
+  p { margin: 0 0 14px; max-width: 66ch; }
+  ul.plain { margin: 0 0 14px; padding-left: 20px; max-width: 66ch; }
+  ul.plain li { margin-bottom: 6px; }
   .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: .9em; word-break: break-all; }
   .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+  .muted { color: var(--muted); }
+  small { font-size: 13px; }
 
   nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
   nav .brand { display: flex; align-items: center; gap: 10px; font-family: Poppins, sans-serif; font-weight: 700; font-size: 18px; border: 0; }
   nav .brand svg { width: 30px; height: 30px; }
-  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; }
+  nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
   nav ul a { border: 0; color: var(--muted); font-size: 14px; font-weight: 500; }
   nav ul a:hover { color: var(--ink); }
 
@@ -63,6 +68,12 @@
 
   section { padding-block: 44px; border-top: 1px solid var(--line); }
 
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 18px 0 8px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .stat .label { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
+  .stat .value { font-family: Poppins, sans-serif; font-weight: 700; font-size: 24px; margin-top: 4px; }
+  .stat .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
   .details { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-top: 18px; }
   .details > div { background: var(--surface); padding: 14px 18px; }
   .details dt { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
@@ -73,11 +84,33 @@
   .step .n { font-family: Poppins, sans-serif; font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
   .step p { color: var(--muted); font-size: 15px; margin: 6px 0 0; }
 
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; }
+  .cards.two { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 15px; margin: 0 0 8px; max-width: none; }
+  .card p:last-child { margin-bottom: 0; }
+
   .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
   .person { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; }
   .person .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-deep)); display: grid; place-items: center; font-family: Poppins, sans-serif; font-weight: 700; color: #fff; font-size: 20px; }
   .person .role { color: var(--muted); font-size: 14px; }
   .person a { font-size: 14px; }
+
+  .timeline { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+  .timeline li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  .timeline .phase { font-family: Poppins, sans-serif; font-weight: 700; color: var(--accent); }
+  .timeline .phase span { display: block; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .timeline .phase span.now { color: var(--ok); }
+  .timeline p { margin: 0; color: var(--muted); font-size: 15px; max-width: none; }
+  .timeline strong { color: var(--ink); }
+
+  details.faq { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0 18px; margin-top: 10px; }
+  details.faq summary { cursor: pointer; padding: 14px 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after { content: "+"; color: var(--accent); font-weight: 700; }
+  details.faq[open] summary::after { content: "–"; }
+  details.faq p { color: var(--muted); font-size: 15px; padding-bottom: 14px; max-width: none; }
 
   .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
   .links a { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; color: var(--ink); font-weight: 500; }
@@ -86,13 +119,15 @@
 
   .notice { background: var(--bg2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 18px; color: var(--muted); font-size: 14px; }
   .notice p { max-width: none; }
+  .notice p:last-child { margin-bottom: 0; }
   footer { color: var(--muted); font-size: 13px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
   @media (max-width: 720px) {
     header.hero { grid-template-columns: 1fr; text-align: left; padding-block: 24px 40px; }
     header.hero .logo { width: 150px; height: 150px; }
     .details, .steps { grid-template-columns: 1fr; }
-    nav ul { gap: 14px; }
+    .timeline li { grid-template-columns: 1fr; gap: 6px; }
+    nav ul { gap: 12px; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
@@ -107,9 +142,12 @@
   </a>
   <ul>
     <li><a href="#about">About</a></li>
+    <li><a href="#issuer">Issuer</a></li>
     <li><a href="#details">Token</a></li>
-    <li><a href="#how">How it works</a></li>
+    <li><a href="#reserves">Reserves</a></li>
+    <li><a href="#security">Security</a></li>
     <li><a href="#team">Team</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -117,11 +155,12 @@
 <header class="hero" id="top">
   <img class="logo" src="img/USDB_logo.svg" alt="USDB logo" width="220" height="220">
   <div>
-    <span class="pill"><span class="dot"></span> Testing phase · Ethereum mainnet</span>
+    <span class="pill"><span class="dot"></span> Ethereum mainnet · ERC‑20 · Issued by Blotix Fund LLC</span>
     <h1>USDB</h1>
-    <p class="lede">A USD-denominated digital token created within the Blotix ecosystem, used to settle client withdrawals and to study decentralized financial markets.</p>
+    <p class="lede">A USD‑denominated digital token created within the Blotix ecosystem. Blotix uses it to pay its platform clients, who can hold it, transfer it, or exchange it for USDT on Uniswap.</p>
     <div class="cta">
       <a class="btn primary" href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">View on Etherscan</a>
+      <a class="btn" href="docs/USDB_Technical_Overview.pdf">Technical overview (PDF)</a>
       <a class="btn" href="https://github.com/gasteh/blotix-usdb">Source code</a>
     </div>
   </div>
@@ -130,23 +169,53 @@
 <section id="about">
   <p class="eyebrow">About</p>
   <h2>What USDB is</h2>
-  <p>USDB is an ERC‑20 token on Ethereum issued within the Blotix ecosystem. Blotix uses it to settle withdrawals of its platform clients: when a client withdraws, they receive USDB in their own wallet and are free to hold it, transfer it, or exchange it for USDT on Uniswap.</p>
-  <p>Its value is referenced to the US dollar and supported by reserves held by the issuer. No guarantee of price stability is made. Issuance and redemption are controlled by a multi‑signature Safe; the contract is not upgradeable and charges no transfer fees.</p>
-  <div class="notice"><p><strong>Testing phase.</strong> USDB is currently used internally to validate the system. It is not offered to the public, it is not an investment product, and it should not be purchased with the expectation of profit.</p></div>
+  <p>USDB is an ERC‑20 token on Ethereum issued by Blotix Fund LLC within the Blotix ecosystem. Blotix operates a platform where clients hold balances derived from real‑world‑asset tokenizations. When a client withdraws, Blotix pays the withdrawal in USDB: the client receives the tokens in their own Ethereum wallet, under their sole control, and can keep them, transfer them, or exchange them for USDT on the USDB/USDT Uniswap pool.</p>
+  <p>USDB is denominated in US dollars and is supported by USDT reserves held by the issuer. It is a means of payment for Blotix clients, not a product sold to the public. No guarantee of price stability is made and nothing on this site is investment advice.</p>
+  <div class="notice"><p><strong>Who can obtain USDB.</strong> USDB is issued only to clients of the Blotix platform as payment of their balances. It is not sold to the public, it is not an investment product and it should not be purchased with the expectation of profit. Third parties may still acquire it on the open market; the issuer does not promote or solicit such purchases.</p></div>
+</section>
+
+<section id="issuer">
+  <p class="eyebrow">Issuer</p>
+  <h2>Who issues USDB</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Blotix Fund LLC</h3>
+      <p>16192 Coastal Highway, Lewes, Delaware 19958, United States · Company number 2637402.</p>
+      <p>Office: 14 Wall Street, 20th floor, New York, NY 10005.</p>
+      <p>Websites: <a href="https://www.blotix.io">blotix.io</a> · <a href="https://www.blotix.com">blotix.com</a></p>
+    </div>
+    <div class="card">
+      <h3>The Blotix ecosystem</h3>
+      <p>Blotix is a protocol for real‑world‑asset (RWA) tokenization with its own ERC‑20 token, BLOTIX, on Ethereum. USDB is the settlement token of that ecosystem: it lets clients receive the US‑dollar value of their balances in a form they can use anywhere on Ethereum.</p>
+      <p><a href="https://blotix.org/files/WHITEPAPER_BLOTIX_1.pdf">Blotix whitepaper (PDF)</a></p>
+    </div>
+    <div class="card">
+      <h3>Issuer controls</h3>
+      <p>Issuance and redemption are executed from a Safe multisig owned by the issuer. The issuer can mint, burn, pause the token and freeze addresses in response to legal requirements — the same control model used by major USD tokens.</p>
+      <p><a class="mono" href="https://etherscan.io/address/0xEA3021F4A10a94E80d60bF7Cc1f855312E263846">0xEA30…3846</a> (Safe)</p>
+    </div>
+  </div>
 </section>
 
 <section id="details">
   <p class="eyebrow">Token</p>
   <h2>Token details</h2>
+  <div class="stats" aria-live="polite">
+    <div class="stat"><div class="label">Total supply</div><div class="value" id="stat-supply">—</div><div class="sub" id="stat-supply-sub">Read live from Ethereum</div></div>
+    <div class="stat"><div class="label">Holders</div><div class="value"><a href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB#balances" style="border:0">View on Etherscan</a></div><div class="sub">Public on‑chain data</div></div>
+    <div class="stat"><div class="label">Contract</div><div class="value" style="color:var(--ok)">Verified</div><div class="sub">Source code published on Etherscan</div></div>
+  </div>
   <dl class="details">
     <div><dt>Network</dt><dd>Ethereum mainnet</dd></div>
     <div><dt>Standard</dt><dd>ERC‑20 with EIP‑2612 permit</dd></div>
-    <div><dt>Contract</dt><dd><a class="mono" href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB</a><br><small style="color:var(--muted)">Source verified on Etherscan</small></dd></div>
+    <div><dt>Contract</dt><dd><a class="mono" href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB</a></dd></div>
     <div><dt>Symbol / decimals</dt><dd>USDB / 6</dd></div>
-    <div><dt>Issuer</dt><dd>Safe multisig <a class="mono" href="https://etherscan.io/address/0xEA3021F4A10a94E80d60bF7Cc1f855312E263846">0xEA3021F4A10a94E80d60bF7Cc1f855312E263846</a></dd></div>
-    <div><dt>Liquidity</dt><dd>Uniswap V3 · USDB/USDT · 0.01% · <a class="mono" href="https://etherscan.io/address/0x74bf3e066e624b848c178407f2f4cbba6205be2e">0x74bf3e…5be2e</a></dd></div>
+    <div><dt>Issuer (contract owner)</dt><dd>Safe multisig <a class="mono" href="https://etherscan.io/address/0xEA3021F4A10a94E80d60bF7Cc1f855312E263846">0xEA3021F4A10a94E80d60bF7Cc1f855312E263846</a></dd></div>
+    <div><dt>Liquidity</dt><dd>Uniswap V3 · USDB/USDT · 0.01% fee · <a class="mono" href="https://etherscan.io/address/0x74bf3e066e624b848c178407f2f4cbba6205be2e">0x74bf3e…5be2e</a></dd></div>
     <div><dt>Code base</dt><dd>OpenZeppelin Contracts 5.6.1 · Solidity 0.8.26</dd></div>
-    <div><dt>Issuer controls</dt><dd>mint, burn, pause, blacklist · two‑step ownership · no upgrade path</dd></div>
+    <div><dt>Deployed</dt><dd>12 September 2026 · <a href="https://etherscan.io/tx/0xc98efac51aa6894e2962652a1a17cc3a55997c558453daaba0dc1b83e66854fc">deployment transaction</a></dd></div>
+    <div><dt>Issuer functions</dt><dd>mint · burn · pause / unpause · blacklist · destroyBlackFunds · rescueERC20</dd></div>
+    <div><dt>Not possible</dt><dd>upgrades · transfer fees · renouncing the issuer role</dd></div>
   </dl>
 </section>
 
@@ -154,15 +223,54 @@
   <p class="eyebrow">Process</p>
   <h2>How it works</h2>
   <div class="steps">
-    <div class="step"><div class="n">1</div><h3>Withdrawal request</h3><p>A Blotix platform client requests a withdrawal of their balance.</p></div>
-    <div class="step"><div class="n">2</div><h3>USDB delivered</h3><p>The client receives USDB in their own Ethereum wallet, under their sole control.</p></div>
-    <div class="step"><div class="n">3</div><h3>Free to use</h3><p>The client can hold it, transfer it, or exchange it for USDT on Uniswap.</p></div>
+    <div class="step"><div class="n">1</div><h3>Withdrawal request</h3><p>A Blotix platform client requests to withdraw part or all of their balance.</p></div>
+    <div class="step"><div class="n">2</div><h3>Paid in USDB</h3><p>The issuer sends the US‑dollar value of the withdrawal in USDB to the client's own Ethereum wallet.</p></div>
+    <div class="step"><div class="n">3</div><h3>Free to use</h3><p>The client keeps it, transfers it, or exchanges it for USDT on the USDB/USDT Uniswap pool.</p></div>
+  </div>
+</section>
+
+<section id="reserves">
+  <p class="eyebrow">Reserves</p>
+  <h2>Reserves and redemption</h2>
+  <p>USDB is supported by USDT reserves held by the issuer. When Blotix pays clients in USDB, it supplies USDT liquidity to the USDB/USDT Uniswap V3 pool in line with the payments made, so that clients can exchange their USDB for USDT at any time without depending on the issuer's availability.</p>
+  <p>USDB that returns to the issuer can be burned, removing it from circulation. Supply is therefore not fixed: it expands when clients are paid and contracts when tokens are redeemed.</p>
+  <ul class="plain muted">
+    <li>Reserve asset: USDT (Tether) on Ethereum.</li>
+    <li>Redemption path for clients: the USDB/USDT pool on Uniswap V3 (0.01% fee tier).</li>
+    <li>Reserve reporting: on‑chain publication of the reserve address is planned once the treasury is fully migrated to the multisig (see roadmap). Until then, reserves are held by the issuer and not publicly attested.</li>
+  </ul>
+  <div class="notice"><p>USDB is denominated in US dollars but no guarantee of price stability is made. Its market price on Uniswap depends on the liquidity available in the pool at any given time.</p></div>
+</section>
+
+<section id="security">
+  <p class="eyebrow">Security</p>
+  <h2>Security and transparency</h2>
+  <div class="cards two">
+    <div class="card">
+      <h3>Verified source code</h3>
+      <p>The exact source code of the contract is published and verified on Etherscan, so anyone can read what the token does. The contract is built on OpenZeppelin Contracts 5.6.1, the most widely used Solidity library, with a small issuer layer on top.</p>
+      <p><a href="https://etherscan.io/address/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB#code">Read the verified code</a></p>
+    </div>
+    <div class="card">
+      <h3>Static analysis</h3>
+      <p>The contract was analyzed with Slither (Trail of Bits, 102 detectors). No High‑ or Medium‑impact finding exists in the USDB contract; the only USDB‑specific result is a cosmetic naming note in the standard EIP‑2612 <span class="mono">permit</span> signature.</p>
+      <p><a href="https://github.com/gasteh/blotix-usdb/blob/main/security/SLITHER_REPORT.md">Full report</a> · No independent third‑party audit has been performed yet.</p>
+    </div>
+    <div class="card">
+      <h3>Immutable and controlled</h3>
+      <p>No proxy and no upgrade path: the code that runs today is the code that will always run. The issuer role cannot be renounced, so the token can never be left without a responsible issuer, and ownership changes require a two‑step transfer.</p>
+    </div>
+    <div class="card">
+      <h3>Compliance controls</h3>
+      <p>Like USDT and USDC, the issuer can pause transfers and freeze specific addresses. These controls exist to respond to legal orders and security incidents; they are executed only from the issuer's Safe multisig and every use is visible on‑chain.</p>
+    </div>
   </div>
 </section>
 
 <section id="team">
   <p class="eyebrow">People</p>
   <h2>Team</h2>
+  <p class="muted">USDB is built and operated by the Blotix team.</p>
   <div class="team">
     <div class="person"><div class="avatar">MF</div><div><h3>Massimo Fustinoni</h3><div class="role">CEO, Blotix</div><a href="https://www.linkedin.com/in/maxfortunapruduction/">LinkedIn</a></div></div>
     <div class="person"><div class="avatar">MS</div><div><h3>Massimo Sbordi</h3><div class="role">Strategic Development Manager, Blotix Fund LLC</div><a href="https://www.linkedin.com/in/massimo-sbordi-ab39747/">LinkedIn</a></div></div>
@@ -170,30 +278,86 @@
   </div>
 </section>
 
+<section id="roadmap">
+  <p class="eyebrow">Status</p>
+  <h2>Roadmap</h2>
+  <ol class="timeline">
+    <li><div class="phase">Phase 1<span class="now">Current</span></div><p><strong>Launch.</strong> Contract deployed and verified on Ethereum mainnet · Safe multisig as issuer · USDB/USDT pool live on Uniswap V3 · internal validation of the payment flow · static analysis published.</p></li>
+    <li><div class="phase">Phase 2<span>Next</span></div><p><strong>Client payments.</strong> First withdrawals paid in USDB · treasury and liquidity operated from a 2‑of‑3 multisig · publication of the reserve address for on‑chain verification.</p></li>
+    <li><div class="phase">Phase 3<span>Later</span></div><p><strong>Visibility.</strong> Token information on block explorers and price aggregators (Etherscan, CoinGecko) · client guide and support channels · independent security review.</p></li>
+  </ol>
+</section>
+
+<section id="faq">
+  <p class="eyebrow">FAQ</p>
+  <h2>Frequently asked questions</h2>
+  <details class="faq"><summary>What is USDB used for?</summary><p>Blotix uses USDB to pay its platform clients. When a client withdraws their balance, they receive the equivalent US‑dollar amount in USDB in their own Ethereum wallet.</p></details>
+  <details class="faq"><summary>Can I buy USDB?</summary><p>USDB is not sold by the issuer to the public. It is issued only to Blotix clients as payment. Once in circulation it can be traded on Uniswap like any ERC‑20 token, but the issuer does not promote or solicit such purchases and USDB is not an investment product.</p></details>
+  <details class="faq"><summary>How do I convert USDB to USDT?</summary><p>Through the USDB/USDT pool on Uniswap V3 (0.01% fee tier). Connect your wallet on <a href="https://app.uniswap.org/explore/tokens/ethereum/0xdaf05c8680a06a5a30a8e3ffe25062ed4e4d21fb">app.uniswap.org</a>, select USDB → USDT and swap. You need a small amount of ETH in your wallet to pay the network fee.</p></details>
+  <details class="faq"><summary>What backs USDB?</summary><p>USDT reserves held by the issuer, Blotix Fund LLC. The issuer adds USDT liquidity to the Uniswap pool in line with the payments it makes in USDB. Reserves are not yet publicly attested; publishing the reserve address on‑chain is part of the roadmap.</p></details>
+  <details class="faq"><summary>Is USDB always worth exactly 1 USD?</summary><p>USDB is denominated in US dollars and the pool is set up so that 1 USDB trades close to 1 USDT, but no guarantee of price stability is made. The market price depends on the liquidity in the pool at a given moment.</p></details>
+  <details class="faq"><summary>Which wallets support USDB?</summary><p>Any Ethereum wallet that supports ERC‑20 tokens (MetaMask, Rabby, Ledger, Trust Wallet, etc.). If the token does not appear automatically, add it with the contract address <span class="mono">0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB</span> and 6 decimals.</p></details>
+  <details class="faq"><summary>Are there fees?</summary><p>The token itself charges no transfer fee. Sending USDB costs the normal Ethereum network fee (gas), and swapping on Uniswap costs the pool fee (0.01%) plus gas.</p></details>
+  <details class="faq"><summary>Can the issuer freeze my tokens?</summary><p>Yes. Like USDT and USDC, the contract lets the issuer pause transfers and freeze specific addresses. These controls are meant for legal orders and security incidents, are executed only from the issuer's multisig, and every use is recorded on‑chain.</p></details>
+  <details class="faq"><summary>There is another token called USDB. Is this the same?</summary><p>No. Several unrelated tokens use the USDB symbol on different networks. Always check the contract address: the Blotix USDB is <span class="mono">0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB</span> on Ethereum mainnet.</p></details>
+  <details class="faq"><summary>Is the contract audited?</summary><p>The source code is verified on Etherscan and has been analyzed with Slither (see Security). An independent third‑party audit has not been performed yet; it is part of the roadmap.</p></details>
+</section>
+
 <section id="resources">
   <p class="eyebrow">Resources</p>
-  <h2>Links</h2>
+  <h2>Links and official channels</h2>
   <div class="links">
     <a href="https://etherscan.io/token/0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB">Etherscan <span>Token page, holders and verified source</span></a>
-    <a href="https://github.com/gasteh/blotix-usdb">GitHub <span>Contract source and brand assets</span></a>
     <a href="https://app.uniswap.org/explore/tokens/ethereum/0xdaf05c8680a06a5a30a8e3ffe25062ed4e4d21fb">Uniswap <span>USDB/USDT pool</span></a>
-    <a href="https://www.blotix.io">Blotix <span>The ecosystem USDB was created in</span></a>
+    <a href="https://github.com/gasteh/blotix-usdb">GitHub <span>Contract source, security report and brand assets</span></a>
+    <a href="docs/USDB_Technical_Overview.pdf">Technical overview <span>USDB documentation (PDF)</span></a>
     <a href="https://blotix.org/files/WHITEPAPER_BLOTIX_1.pdf">Blotix whitepaper <span>Ecosystem, team and roadmap (PDF)</span></a>
-    <a href="img/USDB_logo.svg">Logo (SVG) <span>Brand asset, also available as PNG</span></a>
+    <a href="https://www.blotix.io">Blotix <span>The ecosystem USDB was created in</span></a>
+    <a href="https://x.com/blotixfund">X (Twitter) <span>@blotixfund — official Blotix account</span></a>
+    <a href="https://t.me/BLXblotix">Telegram <span>Official Blotix community</span></a>
+    <a href="https://www.instagram.com/blotixfund/">Instagram <span>@blotixfund</span></a>
+    <a href="https://www.reddit.com/r/BLOTIX/">Reddit <span>r/BLOTIX</span></a>
+    <a href="https://medium.com/@info_16062">Medium <span>Blotix articles</span></a>
+    <a href="img/USDB_logo.svg">Logo (SVG) <span>Brand asset, vector</span></a>
+    <a href="img/USDB_logo_512.png">Logo (PNG) <span>512 × 512 px</span></a>
   </div>
 </section>
 
 <section id="contact">
   <p class="eyebrow">Contact</p>
   <h2>Get in touch</h2>
-  <p>Email: <a href="mailto:contact@usdbtoken.com">contact@usdbtoken.com</a></p>
+  <p>Email: <a href="mailto:contact@usdbtoken.com">contact@usdbtoken.com</a><br>Community: <a href="https://t.me/BLXblotix">Telegram</a> · <a href="https://x.com/blotixfund">X</a></p>
+  <p class="muted"><small>Blotix Fund LLC · 16192 Coastal Highway, Lewes, Delaware 19958, USA · Phone +1‑212‑618‑1636</small></p>
 </section>
 
 <footer>
-  <span>© 2026 USDB · Created within the Blotix ecosystem</span>
+  <span>© 2026 Blotix Fund LLC · USDB is created within the Blotix ecosystem</span>
   <span>Not an offer to the public. Not investment advice.</span>
 </footer>
 </div>
+
+<script>
+(function () {
+  var CONTRACT = '0xDAF05C8680A06a5A30A8e3Ffe25062eD4e4D21fB';
+  var RPCS = ['https://ethereum-rpc.publicnode.com', 'https://eth.llamarpc.com', 'https://rpc.ankr.com/eth'];
+  var el = document.getElementById('stat-supply'), sub = document.getElementById('stat-supply-sub');
+  function fmt(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+  function tryRpc(i) {
+    if (i >= RPCS.length) { el.textContent = 'See Etherscan'; sub.textContent = 'Live data unavailable'; return; }
+    fetch(RPCS[i], { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_call', params: [{ to: CONTRACT, data: '0x18160ddd' }, 'latest'] }) })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.result) throw new Error('no result');
+      var raw = BigInt(j.result); var whole = Number(raw / 1000000n);
+      el.textContent = fmt(whole) + ' USDB';
+      sub.textContent = 'Live from Ethereum · ' + new Date().toUTCString().replace(' GMT', ' UTC');
+    })
+    .catch(function () { tryRpc(i + 1); });
+  }
+  if (typeof BigInt !== 'undefined' && window.fetch) tryRpc(0); else { el.textContent = 'See Etherscan'; }
+})();
+</script>
 
 </body>
 </html>
